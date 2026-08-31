@@ -27,19 +27,20 @@ web_content = """
 """
 
 # Force Python to create files on your Desktop to avoid Permission Errors
-desktop_path = os.path.expanduser("~/Desktop")
-os.chdir(desktop_path)
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 # Write the index file securely
 with open("index.html", "w") as file:
     file.write(web_content)
 
 # Configure and fire up the web application host server
-PORT = 8000
+PORT = 10000
 handler = http.server.SimpleHTTPRequestHandler
 
 print(f"Starting server... Open your browser to http://localhost:{PORT}")
-webbrowser.open(f"http://localhost:{PORT}")
+
 
 with socketserver.TCPServer(("", PORT), handler) as httpd:
     httpd.serve_forever()
